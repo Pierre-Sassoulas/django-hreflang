@@ -7,4 +7,8 @@
 - Headers for redirection pages, like /en/ redirecting to /en-gb/ or /en-us/ based on user
 	- I am not sure if there is a standard way this is implemented in Django, so not making it yet
 
+- Tests
+	- does middleware overwrite previous File header?
+	- is the file header valid?
+
 

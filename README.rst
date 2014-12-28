@@ -2,12 +2,17 @@
 Django hreflang
 ---------------------------------
 
-Generate the hreflang html header lines when using i18n urls
+Providing hreflang information for your website is recommended by Google. If you are using i18n urls, this Django app can add this hreflang information automatically in one of several ways.
+
+For more information about hreflang, have a look at https://support.google.com/webmasters/answer/189077?hl=en
 
 Installation & Configuration:
 -----------------------------
 
-- This assumes that you are using internationalization for your URL patterns, as described at https://docs.djangoproject.com/en/1.7/topics/i18n/translation/#module-django.conf.urls.i18n
+This assumes that you are using internationalization for your URL patterns, as described at https://docs.djangoproject.com/en/1.7/topics/i18n/translation/#module-django.conf.urls.i18n
+
+You may need to take zero or one of these steps:
+
 - If you want to use the html tag, add ``hreflang`` to your ``INSTALLED_APPS``
 - If you want to use the middleware, add ``hreflang.AddHreflangToResponse`` to your ``MIDDLEWARE_CLASSES``
 
@@ -17,6 +22,11 @@ How to use
 ---------------------------------
 
 hreflang information can, in general, be provided in three ways: in the html files's <head>, in the http Files header or through a sitemap. This package supports the first two.
+
+Which way should I use?
+=================================
+
+My personal preference is using the HTML <head> links in a special block in the base template. If there are any special documents (e.g. pdf) use the ``hreflang_headers`` function. This allows per-page control with minimal effort (unless you serve mostly special documents).
 
 HTML <head> (template tags)
 =================================
@@ -62,7 +72,7 @@ To get a list of <li>-links to all (other) language versions of the current docu
     <ul>{% lang_list %}</ul>
     <ul>{% other_lang_list %}</ul>
 
-Useful extra function(ss)
+Useful extra function(s)
 =================================
 
 hreflang contains a version of ``reverse`` with additional parameters ``lang`` and ``use_lang_prefix``.
