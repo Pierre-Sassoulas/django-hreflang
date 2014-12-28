@@ -12,6 +12,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse as lang_implied_reverse, NoReverseMatch
 from django.utils import lru_cache
 from django.utils.translation import activate, deactivate, get_language
+from django.core.urlresolvers import resolve
 
 
 try:
@@ -50,12 +51,27 @@ def reverse(*args, lang = None, use_lang_prefix = True, **kwargs):
 	return url
 
 
+def get_hreflang_info(path, default = True):
+	"""
+		@param path: current path (request.path)
+		@param default: include the default landing page (x-default without language code)
+		:return: a list of (code, url) tuples for all language versions
+	"""
+	reverse_match = resolve(path)
+	info = []
+	if default:
+		info.append(('x-default', reverse(reverse_match.view_name, use_lang_prefix = True, kwargs = reverse_match.kwargs)))
+	for lang in language_codes():
+		info.append((lang, reverse(reverse_match.view_name, lang = lang, use_lang_prefix = False, kwargs = reverse_match.kwargs)))
+	return info
+
+
 @lru_cache.lru_cache()
 def languages():
 	"""
-		Get language and regionale codes and names of all languages that are supported.
+		Get language and regionale codes and names of all languages that are supported as a dictionary.
 	"""
-	return copy(LANGUAGES)
+	return {key: name for key,name in LANGUAGES}
 
 
 @lru_cache.lru_cache()

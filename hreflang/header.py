@@ -5,9 +5,7 @@
 	https://support.google.com/webmasters/answer/189077?hl=en
 """
 
-from django.core.urlresolvers import resolve
-from django.utils.translation import get_language
-from hreflang import language_codes, reverse
+from hreflang.functions import get_hreflang_info
 
 
 def hreflang_headers(response, request = None, path = None):
@@ -20,16 +18,13 @@ def hreflang_headers(response, request = None, path = None):
 		:return: response is modified and returned
 	"""
 	assert request or path, 'hreflang_headers needs the current url, please either provide request or a path'
-	reverse_match = resolve(path or request.path)
 	links = []
-	for lang in language_codes():
-		new_url = reverse(reverse_match.view_name, lang = lang, kwargs = reverse_match.kwargs)
-		links.append('<{1}>; rel="alternate"; hreflang="{0}"'.format(lang, new_url))
-	print(response['Link'])
-	response['Link'] = '{0},'.format(response['Link']) if response['Link'] else ''
+	hreflang_info = get_hreflang_info(path or request.path)
+	for lang, url in hreflang_info:
+		links.append('<{1}>; rel="alternate"; hreflang="{0}"'.format(lang, url))
+	response['Link'] = '{0},'.format(response['Link']) if 'Link' in response else ''
 	response['Link'] += ','.join(links)
 	return response
-	#'Link: <http://es.example.com/>; rel="alternate"; hreflang="es"'
 
 
 class AddHreflangToResponse():
