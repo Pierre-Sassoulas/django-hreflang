@@ -7,7 +7,6 @@
 		https://djangosnippets.org/snippets/2875/
 """
 
-from copy import copy
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse as lang_implied_reverse, NoReverseMatch
 from django.utils import lru_cache

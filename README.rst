@@ -35,7 +35,7 @@ To include the links in the <head>, follow this minimal example::
 
     {% load hreflang %}
     <head>
-    {% hreflang_tags %}
+        {% hreflang_tags %}
     </head>
 
 (hreflang must be in installed apps.)
