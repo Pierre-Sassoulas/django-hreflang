@@ -87,3 +87,4 @@ License
 django_hreflang is available under the revised BSD license, see LICENSE.txt. You can do anything as long as you include the license, don't use my name for promotion and are aware that there is no warranty.
 
 
+

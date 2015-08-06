@@ -9,9 +9,9 @@ from setuptools import find_packages
 
 setup(
 	name='django_hreflang',
-	version='0.1.0',
+	version='1.0.0',
 	author='Mark V',
-	author_email='noreply.mail.nl',
+	author_email='mdilligaf@gmail.com',
 	packages=find_packages(),
 	include_package_data=True,
 	url='git+https://bitbucket.org/mverleg/django_hreflang',
