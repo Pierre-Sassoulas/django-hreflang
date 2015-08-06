@@ -11,7 +11,11 @@ Installation & Configuration:
 
 This assumes that you are using internationalization for your URL patterns, as described at https://docs.djangoproject.com/en/1.7/topics/i18n/translation/#module-django.conf.urls.i18n
 
-You may need to take zero or one of these steps:
+First install the package::
+
+    pip install django_hreflang
+
+You may need to take *zero or one* of these steps:
 
 - If you want to use the html tag, add ``hreflang`` to your ``INSTALLED_APPS``
 - If you want to use the middleware, add ``hreflang.AddHreflangToResponse`` to your ``MIDDLEWARE_CLASSES``
