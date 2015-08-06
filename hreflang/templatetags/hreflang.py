@@ -26,16 +26,17 @@ def translate_url(context, lang):
 
 
 @register.simple_tag(takes_context = True)
-def hreflang_tags(context):
+def hreflang_tags(context, indent = 0):
 	"""
 		Create all hreflang <link> tags (which includes the current document as per the standard).
 	"""
 	assert 'request' in context, 'hreflang_tags needs request context'
+	print(context['request'].path)
 	hreflang_info = get_hreflang_info(context['request'].path)
-	hreflang_html = ''
+	hreflang_html = []
 	for lang, url in hreflang_info:
-		hreflang_html += '<link rel="alternate" hreflang="{0}" href="{1}" />\n'.format(lang, url)
-	return hreflang_html
+		hreflang_html.append('<link rel="alternate" hreflang="{0}" href="{1}" />\n'.format(lang, url))
+	return ('\t' * indent).join(hreflang_html)
 
 
 def _make_list_html(path, incl_current):

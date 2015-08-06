@@ -28,10 +28,14 @@ def reverse(*args, lang = None, use_lang_prefix = True, **kwargs):
 		return lang_implied_reverse(*args, **kwargs)
 	cur_language = get_language()
 	if use_lang_prefix:
+		print('1a', lang, get_language())
 		activate(lang)
+		print('1b', lang, get_language())
 	else:
+		print('1c')
 		deactivate()
 	url = lang_implied_reverse(*args, **kwargs)
+	print('2', lang, url)
 	if not use_lang_prefix:
 		if not url.startswith('/{0}'.format(settings.LANGUAGE_CODE)):
 			raise NoReverseMatch('could not find reverse match with use_lang')
@@ -51,7 +55,7 @@ def get_hreflang_info(path, default = True):
 	if default:
 		info.append(('x-default', reverse(reverse_match.view_name, use_lang_prefix = True, kwargs = reverse_match.kwargs)))
 	for lang in language_codes():
-		info.append((lang, reverse(reverse_match.view_name, lang = lang, use_lang_prefix = False, kwargs = reverse_match.kwargs)))
+		info.append((lang, reverse(reverse_match.view_name, lang = lang, use_lang_prefix = True, kwargs = reverse_match.kwargs)))
 	return info
 
 
@@ -68,6 +72,6 @@ def language_codes():
 	"""
 		Get language with regionale codes of all languages that are supported.
 	"""
-	return [lang_info[0] for lang_info in languages()]
+	return languages().keys()
 
 
