@@ -31,7 +31,6 @@ def hreflang_tags(context, indent = 0):
 		Create all hreflang <link> tags (which includes the current document as per the standard).
 	"""
 	assert 'request' in context, 'hreflang_tags needs request context'
-	print(context['request'].path)
 	hreflang_info = get_hreflang_info(context['request'].path)
 	hreflang_html = []
 	for lang, url in hreflang_info:

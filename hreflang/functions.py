@@ -28,14 +28,10 @@ def reverse(*args, lang = None, use_lang_prefix = True, **kwargs):
 		return lang_implied_reverse(*args, **kwargs)
 	cur_language = get_language()
 	if use_lang_prefix:
-		print('1a', lang, get_language())
 		activate(lang)
-		print('1b', lang, get_language())
 	else:
-		print('1c')
 		deactivate()
 	url = lang_implied_reverse(*args, **kwargs)
-	print('2', lang, url)
 	if not use_lang_prefix:
 		if not url.startswith('/{0}'.format(settings.LANGUAGE_CODE)):
 			raise NoReverseMatch('could not find reverse match with use_lang')
