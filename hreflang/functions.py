@@ -7,21 +7,11 @@
 		https://djangosnippets.org/snippets/2875/
 """
 
-from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse as lang_implied_reverse, NoReverseMatch
 from django.utils import lru_cache
 from django.utils.translation import activate, deactivate, get_language
 from django.core.urlresolvers import resolve
-
-
-try:
-	from settings import LANGUAGE_CODE
-except ImportError:
-	raise ImproperlyConfigured('could not import LANGUAGE_CODE from settings')
-try:
-	from settings import LANGUAGES
-except ImportError:
-	raise ImproperlyConfigured('could not import LANGUAGES from settings')
+from django.conf import settings
 
 
 def reverse(*args, lang = None, use_lang_prefix = True, **kwargs):
@@ -43,9 +33,9 @@ def reverse(*args, lang = None, use_lang_prefix = True, **kwargs):
 		deactivate()
 	url = lang_implied_reverse(*args, **kwargs)
 	if not use_lang_prefix:
-		if not url.startswith('/{0}'.format(LANGUAGE_CODE)):
+		if not url.startswith('/{0}'.format(settings.LANGUAGE_CODE)):
 			raise NoReverseMatch('could not find reverse match with use_lang')
-		url = url[len(LANGUAGE_CODE)+1:]
+		url = url[len(settings.LANGUAGE_CODE)+1:]
 	activate(cur_language)
 	return url
 
@@ -70,7 +60,7 @@ def languages():
 	"""
 		Get language and regionale codes and names of all languages that are supported as a dictionary.
 	"""
-	return {key: name for key,name in LANGUAGES}
+	return {key: name for key,name in settings.LANGUAGES}
 
 
 @lru_cache.lru_cache()
