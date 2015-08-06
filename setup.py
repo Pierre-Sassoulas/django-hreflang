@@ -9,7 +9,7 @@ from setuptools import find_packages
 
 setup(
 	name='django_hreflang',
-	version='v1.1',
+	version='v1.2',
 	author='Mark V',
 	author_email='mdilligaf@gmail.com',
 	packages=find_packages(),
