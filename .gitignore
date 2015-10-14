@@ -5,3 +5,4 @@
 *.sqlite3
 /django_hreflang.egg-info/
 /dist/
+/.pypirc

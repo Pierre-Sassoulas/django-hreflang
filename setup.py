@@ -9,12 +9,12 @@ from setuptools import find_packages
 
 setup(
 	name='django_hreflang',
-	version='v1.2',
+	version='v1.4',
 	author='Mark V',
 	author_email='mdilligaf@gmail.com',
 	packages=find_packages(),
 	include_package_data=True,
-	url='git+https://bitbucket.org/mverleg/django_hreflang',
+	url='https://bitbucket.org/mverleg/django_hreflang',
 	license='Revised BSD License (LICENSE.txt)',
 	description='Generate the hreflang html header lines when using i18n urls',
 	zip_safe=True,
