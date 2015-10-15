@@ -10,7 +10,6 @@ from setuptools import setup
 with open('README.rst', 'r') as fh:
 	readme = fh.read()
 
-
 setup(
 	name='django_hreflang',  # should have used a - sorry
 	description='Generate the hreflang html header lines when using i18n urls on Django sites',
