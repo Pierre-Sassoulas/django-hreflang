@@ -14,7 +14,7 @@ from django.core.urlresolvers import resolve
 from django.conf import settings
 
 
-def reverse(*args, lang = None, use_lang_prefix = True, **kwargs):
+def reverse(lang = None, use_lang_prefix = True, *args, **kwargs):
 	"""
 		Similar to django.core.urlresolvers.reverse except for the extra parameter:
 
