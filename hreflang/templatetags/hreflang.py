@@ -15,13 +15,19 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context = True)
-def translate_url(context, lang):
+def translate_url(context, lang, view_name = None, *args, **kwargs):
 	"""
 		Translate an url to a specific language.
+		@param lang: which language should the url be translated to
+		@param view_name: which view to get url from, current if not set
 	"""
 	assert 'request' in context, 'translate_url needs request context'
-	reverse_match = resolve(context['request'].path)
-	return reverse(reverse_match.view_name, lang = lang, kwargs = reverse_match.kwargs)
+	if view_name is None:
+		reverse_match = resolve(context['request'].path)
+		view_name = reverse_match.view_name
+		args = reverse_match.args
+		kwargs = reverse_match.kwargs
+	return reverse(view_name, lang = lang, *args, **kwargs)
 
 
 @register.simple_tag(takes_context = True)

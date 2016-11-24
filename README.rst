@@ -71,6 +71,10 @@ To obtain a link to the current document in another language, use::
 
     {% translate_url 'en' %}
 
+To obtain a link to a specified view, use::
+
+    {% translate_url 'en' view_name='namespace:name' %}
+
 To get a list of <li>-links to all (other) language versions of the current document, use one of::
 
     <ul>{% lang_list %}</ul>
