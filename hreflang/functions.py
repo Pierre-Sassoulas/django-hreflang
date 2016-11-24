@@ -14,7 +14,7 @@ from django.core.urlresolvers import resolve
 from django.conf import settings
 
 
-def reverse(lang = None, use_lang_prefix = True, *args, **kwargs):
+def reverse(view_name, lang = None, use_lang_prefix = True, *args, **kwargs):
 	"""
 		Similar to django.core.urlresolvers.reverse except for the extra parameter:
 
@@ -25,13 +25,13 @@ def reverse(lang = None, use_lang_prefix = True, *args, **kwargs):
 	"""
 	#todo: use_lang_prefix implementation is a bit of a hack now until a better way is found: http://stackoverflow.com/questions/27680748/when-using-i18n-patterns-how-to-reverse-url-without-language-code
 	if lang is None and use_lang_prefix:
-		return lang_implied_reverse(*args, **kwargs)
+		return lang_implied_reverse(view_name, *args, **kwargs)
 	cur_language = get_language()
 	if use_lang_prefix:
 		activate(lang)
 	else:
 		deactivate()
-	url = lang_implied_reverse(*args, **kwargs)
+	url = lang_implied_reverse(view_name, *args, **kwargs)
 	if not use_lang_prefix:
 		if not url.startswith('/{0}'.format(settings.LANGUAGE_CODE)):
 			raise NoReverseMatch('could not find reverse match with use_lang')
