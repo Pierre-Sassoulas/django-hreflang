@@ -7,9 +7,8 @@
 
 from django import template
 from django.core.urlresolvers import resolve
-from hreflang import reverse
 from django.utils.translation import get_language
-from hreflang.functions import languages, get_hreflang_info
+from .. import languages, get_hreflang_info, reverse
 
 
 register = template.Library()
