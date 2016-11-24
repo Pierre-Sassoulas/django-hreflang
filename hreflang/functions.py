@@ -19,9 +19,9 @@ def reverse(view_name, lang = None, use_lang_prefix = True, *args, **kwargs):
 		Similar to django.core.urlresolvers.reverse except for the extra parameter:
 
 		@param lang: language code in which the url is to be translated (ignored if use_lang_prefix is False)
-		@use_lang_prefix: is changed to False, get an url without language prefix
+		@param use_lang_prefix: is changed to False, get an url without language prefix
 
-		If lang is not provided, the normal reverse behavious is obtained.
+		If lang is not provided, the normal reverse behaviour is obtained.
 	"""
 	#todo: use_lang_prefix implementation is a bit of a hack now until a better way is found: http://stackoverflow.com/questions/27680748/when-using-i18n-patterns-how-to-reverse-url-without-language-code
 	if lang is None and use_lang_prefix:
