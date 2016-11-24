@@ -20,7 +20,7 @@ setup(
 	author_email='mdilligaf@gmail.com',
 	license='Revised BSD License (LICENSE.txt)',
 	keywords=['django', 'hreflang', 'http-headers', 'internationalization'],
-	version='1.6',
+	version='1.7',
 	packages=['hreflang', 'hreflang.templatetags'],
 	include_package_data=True,
 	zip_safe=False,
