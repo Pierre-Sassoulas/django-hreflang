@@ -49,7 +49,7 @@ def get_hreflang_info(path, default = True):
 	reverse_match = resolve(path)
 	info = []
 	if default:
-		info.append(('x-default', reverse(reverse_match.view_name, use_lang_prefix = True, kwargs = reverse_match.kwargs)))
+		info.append(('x-default', reverse(reverse_match.view_name, use_lang_prefix = False, kwargs = reverse_match.kwargs)))
 	for lang in language_codes():
 		info.append((lang, reverse(reverse_match.view_name, lang = lang, use_lang_prefix = True, kwargs = reverse_match.kwargs)))
 	return info
