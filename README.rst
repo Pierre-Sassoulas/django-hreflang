@@ -94,5 +94,14 @@ License
 
 django_hreflang is available under the revised BSD license, see LICENSE.txt. You can do anything as long as you include the license, don't use my name for promotion and are aware that there is no warranty.
 
+Contributions
+---------------------------------
+
+Any improvements through pull requests are welcome! You can also open an issue if you notice a problem.
+
+Notable contributors:
+
+* @mverleg [repo owner]
+* @hellishnoob (Leonid Kalichkin)
 
 
