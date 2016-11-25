@@ -101,7 +101,7 @@ Any improvements through pull requests are welcome! You can also open an issue i
 
 Notable contributors:
 
-* @mverleg [repo owner]
-* @hellishnoob (Leonid Kalichkin)
+* @mverleg (owner)
+* @hellishnoob (pull request #1)
 
 
