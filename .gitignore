@@ -6,3 +6,5 @@
 /django_hreflang.egg-info/
 /dist/
 /.pypirc
+/build/
+
