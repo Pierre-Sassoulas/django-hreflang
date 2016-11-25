@@ -31,7 +31,7 @@ class AddHreflangToResponse():
 	"""
 		A middleware that applies hreflang_headers to all responses (adding hreflang headers).
 	"""
-	def process_response(request, response):
+	def process_response(self, request, response):
 		return hreflang_headers(response, request = request)
 
 
