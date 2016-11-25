@@ -1,21 +1,21 @@
 
 """
-	Add hreflang response headers as specified by Google
+Add hreflang response headers as specified by Google
 
-	https://support.google.com/webmasters/answer/189077?hl=en
+https://support.google.com/webmasters/answer/189077?hl=en
 """
 
 from hreflang.functions import get_hreflang_info
 
 
-def hreflang_headers(response, request = None, path = None):
+def hreflang_headers(response, request=None, path=None):
 	"""
-		Adds hreflang headers to a HttpResponse object
+	Adds hreflang headers to a HttpResponse object
 
-		:param response: the HttpResponse to add headers to
-		:param path: the current path for which to add alternate language versions
-		:param request: the request, which is used to find path (ignored if path is set directly)
-		:return: response is modified and returned
+	:param response: the HttpResponse to add headers to
+	:param path: the current path for which to add alternate language versions
+	:param request: the request, which is used to find path (ignored if path is set directly)
+	:return: response is modified and returned
 	"""
 	assert request or path, 'hreflang_headers needs the current url, please either provide request or a path'
 	links = []
@@ -29,9 +29,9 @@ def hreflang_headers(response, request = None, path = None):
 
 class AddHreflangToResponse():
 	"""
-		A middleware that applies hreflang_headers to all responses (adding hreflang headers).
+	A middleware that applies hreflang_headers to all responses (adding hreflang headers).
 	"""
 	def process_response(self, request, response):
-		return hreflang_headers(response, request = request)
+		return hreflang_headers(response, request=request)
 
 

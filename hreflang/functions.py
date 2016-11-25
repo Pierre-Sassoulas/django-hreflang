@@ -1,10 +1,10 @@
 
 """
-	Translate urls to new languages
+Translate urls to new languages
 
-	With inspiration from
-		http://stackoverflow.com/a/17351858/723090
-		https://djangosnippets.org/snippets/2875/
+With inspiration from
+	http://stackoverflow.com/a/17351858/723090
+	https://djangosnippets.org/snippets/2875/
 """
 
 from django.core.urlresolvers import reverse as lang_implied_reverse, NoReverseMatch
@@ -14,14 +14,14 @@ from django.core.urlresolvers import resolve
 from django.conf import settings
 
 
-def reverse(view_name, lang = None, use_lang_prefix = True, *args, **kwargs):
+def reverse(view_name, lang=None, use_lang_prefix=True, *args, **kwargs):
 	"""
-		Similar to django.core.urlresolvers.reverse except for the extra parameter:
+	Similar to django.core.urlresolvers.reverse except for the extra parameter:
 
-		@param lang: language code in which the url is to be translated (ignored if use_lang_prefix is False)
-		@param use_lang_prefix: is changed to False, get an url without language prefix
+	@param lang: anguage code in which the url is to be translated (ignored if use_lang_prefix is False).
+	@param use_lang_prefix: Is changed to False, get an url without language prefix.
 
-		If lang is not provided, the normal reverse behaviour is obtained.
+	If lang is not provided, the normal reverse behaviour is obtained.
 	"""
 	#todo: use_lang_prefix implementation is a bit of a hack now until a better way is found: http://stackoverflow.com/questions/27680748/when-using-i18n-patterns-how-to-reverse-url-without-language-code
 	if lang is None and use_lang_prefix:
@@ -40,25 +40,25 @@ def reverse(view_name, lang = None, use_lang_prefix = True, *args, **kwargs):
 	return url
 
 
-def get_hreflang_info(path, default = True):
+def get_hreflang_info(path, default=True):
 	"""
-		@param path: current path (request.path)
-		@param default: include the default landing page (x-default without language code)
-		:return: a list of (code, url) tuples for all language versions
+	@param path: Current path (request.path).
+	@param default: Include the default landing page (x-default without language code).
+	:return: A list of (code, url) tuples for all language versions.
 	"""
 	reverse_match = resolve(path)
 	info = []
 	if default:
-		info.append(('x-default', reverse(reverse_match.view_name, use_lang_prefix = False, kwargs = reverse_match.kwargs)))
+		info.append(('x-default', reverse(reverse_match.view_name, use_lang_prefix=False, kwargs=reverse_match.kwargs)))
 	for lang in language_codes():
-		info.append((lang, reverse(reverse_match.view_name, lang = lang, use_lang_prefix = True, kwargs = reverse_match.kwargs)))
+		info.append((lang, reverse(reverse_match.view_name, lang=lang, use_lang_prefix=True, kwargs=reverse_match.kwargs)))
 	return info
 
 
 @lru_cache.lru_cache()
 def languages():
 	"""
-		Get language and regionale codes and names of all languages that are supported as a dictionary.
+	Get language and regionale codes and names of all languages that are supported as a dictionary.
 	"""
 	return {key: name for key,name in settings.LANGUAGES}
 
@@ -66,7 +66,7 @@ def languages():
 @lru_cache.lru_cache()
 def language_codes():
 	"""
-		Get language with regionale codes of all languages that are supported.
+	Get language with regionale codes of all languages that are supported.
 	"""
 	return languages().keys()
 

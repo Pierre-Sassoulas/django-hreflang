@@ -1,8 +1,8 @@
 
 """
-	Create hreflang tags as specified by Google
+Create hreflang tags as specified by Google
 
-	https://support.google.com/webmasters/answer/189077?hl=en
+https://support.google.com/webmasters/answer/189077?hl=en
 """
 
 from django import template
@@ -14,12 +14,13 @@ from .. import languages, get_hreflang_info, reverse
 register = template.Library()
 
 
-@register.simple_tag(takes_context = True)
-def translate_url(context, lang, view_name = None, *args, **kwargs):
+@register.simple_tag(takes_context=True)
+def translate_url(context, lang, view_name=None, *args, **kwargs):
 	"""
-		Translate an url to a specific language.
-		@param lang: which language should the url be translated to
-		@param view_name: which view to get url from, current if not set
+	Translate an url to a specific language.
+	
+	@param lang: Which language should the url be translated to.
+	@param view_name: Which view to get url from, current if not set.
 	"""
 	assert 'request' in context, 'translate_url needs request context'
 	if view_name is None:
@@ -27,13 +28,13 @@ def translate_url(context, lang, view_name = None, *args, **kwargs):
 		view_name = reverse_match.view_name
 		args = reverse_match.args
 		kwargs = reverse_match.kwargs
-	return reverse(view_name, lang = lang, *args, **kwargs)
+	return reverse(view_name, lang=lang, *args, **kwargs)
 
 
-@register.simple_tag(takes_context = True)
-def hreflang_tags(context, indent = 0):
+@register.simple_tag(takes_context=True)
+def hreflang_tags(context, indent=0):
 	"""
-		Create all hreflang <link> tags (which includes the current document as per the standard).
+	Create all hreflang <link> tags (which includes the current document as per the standard).
 	"""
 	assert 'request' in context, 'hreflang_tags needs request context'
 	hreflang_info = get_hreflang_info(context['request'].path)
@@ -44,7 +45,7 @@ def hreflang_tags(context, indent = 0):
 
 
 def _make_list_html(path, incl_current):
-	hreflang_info = get_hreflang_info(path, default = False)
+	hreflang_info = get_hreflang_info(path, default=False)
 	hreflang_html = ''
 	for lang, url in hreflang_info:
 		if lang == get_language() and incl_current:
@@ -54,21 +55,22 @@ def _make_list_html(path, incl_current):
 	return hreflang_html
 
 
-@register.simple_tag(takes_context = True)
+@register.simple_tag(takes_context=True)
 def lang_list(context):
 	"""
-		HTML list items with links to each language version of this document. The current document is included without link and with a special .hreflang_current_language class.
+	HTML list items with links to each language version of this document.
+	The current document is included without link and with a special .hreflang_current_language class.
 	"""
 	assert 'request' in context, 'lang_list needs request context'
-	return _make_list_html(context['request'].path, incl_current = True)
+	return _make_list_html(context['request'].path, incl_current=True)
 
 
-@register.simple_tag(takes_context = True)
+@register.simple_tag(takes_context=True)
 def other_lang_list(context):
 	"""
-		Like lang_list, but the current language is excluded.
+	Like lang_list, but the current language is excluded.
 	"""
 	assert 'request' in context, 'other_lang_list needs request context'
-	return _make_list_html(context['request'].path, incl_current = False)
+	return _make_list_html(context['request'].path, incl_current=False)
 
 
