@@ -20,7 +20,7 @@ setup(
 	author_email='mdilligaf@gmail.com',
 	license='Revised BSD License (LICENSE.txt)',
 	keywords=['django', 'hreflang', 'http-headers', 'internationalization'],
-	version='1.7',
+	version='2.0',
 	packages=['hreflang', 'hreflang.templatetags'],
 	include_package_data=True,
 	zip_safe=False,
@@ -41,9 +41,7 @@ setup(
 		'Programming Language :: Python :: Implementation :: PyPy',
 		'Topic :: Software Development :: Libraries :: Python Modules',
 	],
-	install_requires=[
-		'django',
-	],
+	install_requires= ['django>=2.0']
 )
 
 

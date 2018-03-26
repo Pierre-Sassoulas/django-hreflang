@@ -6,8 +6,9 @@ https://support.google.com/webmasters/answer/189077?hl=en
 """
 
 from django import template
-from django.core.urlresolvers import resolve
+from django.urls.base import resolve
 from django.utils.translation import get_language
+
 from .. import languages, get_hreflang_info, reverse
 
 

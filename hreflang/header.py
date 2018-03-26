@@ -4,6 +4,7 @@ Add hreflang response headers as specified by Google
 
 https://support.google.com/webmasters/answer/189077?hl=en
 """
+from django.utils.deprecation import MiddlewareMixin
 
 from hreflang.functions import get_hreflang_info
 
@@ -27,7 +28,7 @@ def hreflang_headers(response, request=None, path=None):
 	return response
 
 
-class AddHreflangToResponse():
+class AddHreflangToResponse(MiddlewareMixin):
 	"""
 	A middleware that applies hreflang_headers to all responses (adding hreflang headers).
 	"""

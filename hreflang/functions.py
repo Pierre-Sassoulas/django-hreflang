@@ -7,11 +7,11 @@ With inspiration from
 	https://djangosnippets.org/snippets/2875/
 """
 
-from django.core.urlresolvers import reverse as lang_implied_reverse, NoReverseMatch
+from django.conf import settings
+from django.urls.base import resolve, reverse as lang_implied_reverse
+from django.urls.exceptions import NoReverseMatch
 from django.utils import lru_cache
 from django.utils.translation import activate, deactivate, get_language
-from django.core.urlresolvers import resolve
-from django.conf import settings
 
 
 def reverse(view_name, lang=None, use_lang_prefix=True, *args, **kwargs):
