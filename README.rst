@@ -15,6 +15,8 @@ First install the package::
 
     pip install django_hreflang
 
+Use version django_hreflang==1.7 for django version inferior to 2.0.
+
 You may need to take *zero or one* of these steps:
 
 - If you want to use the html tag, add ``hreflang`` to your ``INSTALLED_APPS``
