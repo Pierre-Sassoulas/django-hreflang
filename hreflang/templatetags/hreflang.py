@@ -7,6 +7,7 @@ https://support.google.com/webmasters/answer/189077?hl=en
 
 from django import template
 from django.urls.base import resolve
+from django.utils.safestring import mark_safe
 from django.utils.translation import get_language
 
 from .. import languages, get_hreflang_info, reverse
@@ -42,7 +43,7 @@ def hreflang_tags(context, indent=0):
 	hreflang_html = []
 	for lang, url in hreflang_info:
 		hreflang_html.append('<link rel="alternate" hreflang="{0}" href="{1}" />\n'.format(lang, url))
-	return ('\t' * indent).join(hreflang_html)
+	return mark_safe(('\t' * indent).join(hreflang_html))
 
 
 def _make_list_html(path, incl_current):
